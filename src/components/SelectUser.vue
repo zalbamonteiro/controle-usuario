@@ -1,19 +1,10 @@
 <template>
-  <div class="mt-5">
-    <b-form-group>
-      <b-form-select v-model="selected">
-        <b-form-select-option :value="null"
-          >Selecione um usuário</b-form-select-option
-        >
-        <b-form-select-option
-          v-for="(user, index) in users"
-          :key="index"
-          :value="user"
-        >
-          {{ user.firstName }}
-        </b-form-select-option>
-      </b-form-select>
-    </b-form-group>
+  <div>
+    <ul>
+      <li v-for="(usuario, index) in users" :key="index">
+        {{ index + 1 }} - {{ usuario.firstName }} {{ usuario.lastName }}
+      </li>
+    </ul>
   </div>
 </template>
 <script>
@@ -22,19 +13,19 @@ export default {
   data: function () {
     return {
       users: [],
-      selected: null,
     };
   },
   methods: {
     getUser: async function () {
-      const result = await fetch("http://localhost:3000")
+      const result = await fetch("http://localhost:3000/")
         .then((res) => res.json())
         .then((res) => res)
         .catch((error) => {
-          return {
+          const objError = {
             error: true,
             message: error,
           };
+          return objError;
         });
 
       if (!result.error) {
