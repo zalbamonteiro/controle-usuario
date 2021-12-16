@@ -1,5 +1,4 @@
 <template>
-  <b-row>
     <b-col>
       <b-form-group>
         <b-form-select v-model="selected">
@@ -16,9 +15,7 @@
           >
         </b-form-select>
       </b-form-group>
-      {{selected && selected.firstName}}
     </b-col>
-  </b-row>
 </template>
 <script>
 export default {

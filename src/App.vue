@@ -2,7 +2,12 @@
   <div id="app">
     <Header />
     <b-container class="mt-5">
-      <SelectUser :getUsuarioSelecionado="getUsuarioSelecionado"/>
+      <b-row>
+        <SelectUser :getUsuarioSelecionado="getUsuarioSelecionado"/>
+        <b-col md="3">
+           <b-button @click="onChangeFlag"  variant="success">Novo usuários</b-button>
+        </b-col>
+      </b-row>
       <Card 
         v-if="usuarioSelecionado"
         :nome="usuarioSelecionado.firstName + ' ' + usuarioSelecionado.lastName"
@@ -10,8 +15,10 @@
         :username="usuarioSelecionado.username"
         :password="usuarioSelecionado.password"
       />
+      <b-row>
+        <Form />
+      </b-row>
     </b-container>
-
   </div>
 </template>
 
@@ -19,6 +26,7 @@
 import Header from "./components/Header.vue";
 import SelectUser from "./components/SelectUser.vue";
 import Card from "./components/Card.vue";
+import Form from "./components/Form.vue";
 
 export default {
   name: "App",
@@ -26,15 +34,20 @@ export default {
     Header,
     SelectUser,
     Card,
+    Form,
   },
   data: function(){
     return {
-      usuarioSelecionado : null
+      usuarioSelecionado : null,
+      flag : false,
     }
   },
   methods: {
     getUsuarioSelecionado : function( usuario ) {
       this.usuarioSelecionado = usuario;
+    },
+    onChangeFlag : function(){
+      this.flag = !this.flag;
     }
   }
 };
