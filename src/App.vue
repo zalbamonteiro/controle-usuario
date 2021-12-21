@@ -3,19 +3,23 @@
     <Header />
     <b-container class="mt-5">
       <b-row>
-        <SelectUser :getUsuarioSelecionado="getUsuarioSelecionado"/>
-        <b-col md="3">
+        <SelectUser
+          v-show="!flag" 
+          :getUsuarioSelecionado="getUsuarioSelecionado"
+        />
+        <b-col md="3" :offset="flag ? 9 : 0">
            <b-button @click="onChangeFlag"  variant="success">Novo usuários</b-button>
         </b-col>
       </b-row>
       <Card 
+        v-show="!flag"
         v-if="usuarioSelecionado"
         :nome="usuarioSelecionado.firstName + ' ' + usuarioSelecionado.lastName"
         :idade="Number(usuarioSelecionado.age)"
         :username="usuarioSelecionado.username"
         :password="usuarioSelecionado.password"
       />
-      <b-row>
+      <b-row v-show="flag">
         <Form />
       </b-row>
     </b-container>
