@@ -7,6 +7,9 @@
           <p>username : {{ username }}</p>
           <p>password : {{ password }}</p>
         </b-card-text>
+        <b-card-text>
+          <b-button @click="onChangeFlag">Editar</b-button>
+        </b-card-text>
       </b-card>
     </b-col>
   </b-row>
@@ -19,6 +22,7 @@ export default {
     idade: Number,
     username: String,
     password: String,
+    onChangeFlag: Function, 
   },
 };
 </script>

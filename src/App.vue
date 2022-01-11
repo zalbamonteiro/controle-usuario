@@ -18,9 +18,10 @@
         :idade="Number(usuarioSelecionado.age)"
         :username="usuarioSelecionado.username"
         :password="usuarioSelecionado.password"
+        :onChangeFlag="onChangeFlag"
       />
-      <b-row v-show="flag">
-        <Form />
+      <b-row v-if="flag">
+        <Form :usuarioSelecionado="usuarioSelecionado"/>
       </b-row>
     </b-container>
   </div>
