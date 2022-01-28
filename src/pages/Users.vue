@@ -27,8 +27,12 @@
             <b-col md="3">{{user.username}}</b-col>
             <b-col md="2">{{user.password}}</b-col>
             <b-col md="2" class="action-column">
-              <b-button size="sm" variant="primary">Editar</b-button>
-              <b-button size="sm">Excluir</b-button>
+              <b-button size="sm" variant="primary">
+                <b-link class="link-button" :to="{name : 'edit-user', params : { id : user._id}}">
+                  Editar
+                </b-link>
+              </b-button>
+              <b-button size="sm" @click="removeUser(user._id)">Excluir</b-button>
             </b-col>
           </b-row>
         </b-list-group-item>
@@ -61,6 +65,23 @@ export default {
         this.users = result;
       }
     },
+    removeUser: async function( userId ){
+      const result = fetch('http://localhost:3000/'+userId, {
+        method: "DELETE"
+      }).then(res => res.jon())
+        .then(res => res)
+        .catch(error => {
+          return {
+            error: true,
+            message: error
+          }
+        });
+
+
+      if(!result.error){
+        this.getUser();
+      }
+    }
   },
   created: function() {
     this.getUser();
